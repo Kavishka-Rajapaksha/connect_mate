@@ -1,6 +1,7 @@
 import 'package:connect_mate/theme/theme.dart';
 import 'package:connect_mate/widgets/primary_text_widget.dart';
 import 'package:connect_mate/widgets/custom_bottom_nav_bar.dart';
+import 'package:connect_mate/widgets/user_list_item.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -19,6 +20,20 @@ class TestApp extends StatelessWidget {
     );
   }
 }
+
+final List<Map<String, String>> _users = const [
+  {
+    'name': 'Chanuka Saranga',
+    'email': 'chanuka@gmail.com',
+    'date': '2025-05-24',
+  },
+  {'name': 'Jane Doe', 'email': 'jane.doe@example.com', 'date': '2025-05-20'},
+  {
+    'name': 'John Smith',
+    'email': 'john.smith@example.com',
+    'date': '2025-05-18',
+  },
+];
 
 class TestScreen extends StatefulWidget {
   const TestScreen({Key? key}) : super(key: key);
@@ -68,33 +83,53 @@ class _TestScreenState extends State<TestScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Test Screen'),
+        title: Text(_currentTab == 2 ? 'Users' : 'Test Screen'),
         backgroundColor: AppColors.azureRadiance[500],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            PrimaryTextField(
-              placeholder: 'Username',
-              isPassword: false,
-              controller: _usernameController,
-            ),
-            const SizedBox(height: 16),
-            PrimaryTextField(
-              placeholder: 'Password',
-              isPassword: true,
-              controller: _passwordController,
-            ),
-            const SizedBox(height: 24),
-          ],
-        ),
-      ),
+      body: _currentTab == 2 ? _buildUserList() : _buildLoginForm(),
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: _currentTab,
         onTap: _onNavTap,
       ),
+    );
+  }
+
+  Widget _buildLoginForm() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          PrimaryTextField(
+            placeholder: 'Username',
+            isPassword: false,
+            controller: _usernameController,
+          ),
+          const SizedBox(height: 16),
+          PrimaryTextField(
+            placeholder: 'Password',
+            isPassword: true,
+            controller: _passwordController,
+          ),
+          const SizedBox(height: 24),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildUserList() {
+    return ListView.separated(
+      padding: const EdgeInsets.all(16),
+      itemCount: _users.length,
+      separatorBuilder: (_, __) => const SizedBox(height: 12),
+      itemBuilder: (context, idx) {
+        final user = _users[idx];
+        return UserListItem(
+          name: user['name']!,
+          email: user['email']!,
+          date: user['date']!,
+        );
+      },
     );
   }
 }
