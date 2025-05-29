@@ -1,5 +1,6 @@
 import 'package:connect_mate/theme/theme.dart';
 import 'package:connect_mate/widgets/primary_text_widget.dart';
+import 'package:connect_mate/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -29,12 +30,19 @@ class TestScreen extends StatefulWidget {
 class _TestScreenState extends State<TestScreen> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  int _currentTab = 0;
 
   @override
   void dispose() {
     _usernameController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _onNavTap(int idx) {
+    setState(() => _currentTab = idx);
+    // do your navigation logic here, e.g.
+    // if (idx == 0) Navigator.pushNamed(...);
   }
 
   void _onLogin() {
@@ -82,6 +90,10 @@ class _TestScreenState extends State<TestScreen> {
             const SizedBox(height: 24),
           ],
         ),
+      ),
+      bottomNavigationBar: CustomBottomNavBar(
+        currentIndex: _currentTab,
+        onTap: _onNavTap,
       ),
     );
   }
