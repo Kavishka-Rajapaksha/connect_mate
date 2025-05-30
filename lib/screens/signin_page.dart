@@ -145,35 +145,18 @@ class _SignInPageState extends State<SignInPage> {
 
                 const SizedBox(height: 16),
 
-                // Google Sign In button
-                Container(
-                  width: double.infinity,
-                  height: 56,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.mailGray[100] ?? Colors.grey[300]!,
-                    ), // Add null check
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Replace Image.asset with SvgPicture.asset for SVG files
-                      SvgPicture.asset(
-                        'lib/assets/icons/google.svg',
-                        height: 18,
-                        width: 18,
-                      ),
-                      const SizedBox(width: 12),
-                      Text(
-                        'Continue with Google',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black87,
-                        ),
-                      ),
-                    ],
+                // Google Sign In button using PrimaryButton
+                PrimaryButton(
+                  text: 'Continue with Google',
+                  onPressed: () {
+                    // Handle Google sign in
+                  },
+                  isGoogle: true,
+                  borderRadius: 8,
+                  googleIcon: SvgPicture.asset(
+                    'lib/assets/icons/google.svg',
+                    height: 18,
+                    width: 18,
                   ),
                 ),
 

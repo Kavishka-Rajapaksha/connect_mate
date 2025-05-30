@@ -1,3 +1,4 @@
+import 'package:connect_mate/screens/sign_up_page.dart';
 import 'package:connect_mate/screens/signin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:connect_mate/screens/testscreen.dart';
@@ -21,11 +22,11 @@ class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case Routes.home:
-        return _createRoute(const SignInPage());
+        return _createRoute(const SignUpPage());
 
       default:
         // If no matching route is found, go to SplashScreen
-        return _createRoute(const SignInPage());
+        return _createRoute(const SignUpPage());
     }
   }
 
