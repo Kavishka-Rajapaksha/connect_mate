@@ -12,6 +12,7 @@ class PrimaryButton extends StatelessWidget {
   final double borderRadius;
   final double spacing;
   final bool isGoogle;
+  final bool isOutlined; // New parameter for outlined style
   final Widget? googleIcon;
 
   const PrimaryButton({
@@ -19,14 +20,15 @@ class PrimaryButton extends StatelessWidget {
     required this.text,
     this.onPressed,
     this.width,
-    this.height = 54,
+    this.height = 59,
     this.backgroundColor = const Color(0xFF306AE0),
     this.textColor = Colors.white,
     this.fontSize = 16,
     this.fontWeight = FontWeight.w700,
-    this.borderRadius = 4,
+    this.borderRadius = 5,
     this.spacing = 8,
     this.isGoogle = false,
+    this.isOutlined = false, // Default to filled button
     this.googleIcon,
   }) : super(key: key);
 
@@ -43,48 +45,64 @@ class PrimaryButton extends StatelessWidget {
         ),
         clipBehavior: isGoogle ? Clip.antiAlias : Clip.none,
         decoration: ShapeDecoration(
-          color: isGoogle ? Colors.white : backgroundColor,
+          color:
+              isOutlined
+                  ? Colors.transparent
+                  : (isGoogle ? Colors.white : backgroundColor),
           shape: RoundedRectangleBorder(
             side:
-                isGoogle
-                    ? BorderSide(width: 1, color: const Color(0xFFEFF0F6))
-                    : BorderSide.none,
-            borderRadius: BorderRadius.circular(borderRadius),
+                isOutlined
+                    ? BorderSide(
+                      width: 1,
+                      color: const Color(0xFF306AE0),
+                    ) // Blue border for outlined
+                    : (isGoogle
+                        ? BorderSide(width: 1, color: const Color(0xFFEFF0F6))
+                        : BorderSide.none),
+            borderRadius: BorderRadius.circular(
+              borderRadius,
+            ), // Simplified - using the borderRadius property directly
           ),
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment:
+              MainAxisAlignment.center, // Ensure center alignment
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (isGoogle) ...[
+              // Fixed spacing to properly position the Google icon
+              const SizedBox(width: 8),
               Container(
                 width: 18,
                 height: 18,
                 clipBehavior: Clip.antiAlias,
-                decoration: BoxDecoration(),
-                child: googleIcon ?? Stack(),
+                decoration: const BoxDecoration(), // Add const here
+                child: googleIcon ?? const Stack(), // Add const here
               ),
-              SizedBox(width: 10), // Fixed 10px spacing for Google buttons
-            ] else
-              SizedBox(width: spacing / 2),
+              const SizedBox(width: 10),
+            ],
 
-            Expanded(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: isGoogle ? const Color(0xFF252525) : textColor,
-                  fontSize: isGoogle ? 14 : fontSize,
-                  fontFamily: 'Helvetica',
-                  fontWeight: fontWeight,
-                  height: isGoogle ? 1.40 : 1.50,
-                  letterSpacing: isGoogle ? -0.14 : 0,
-                ),
+            // Remove Expanded to allow natural sizing of text
+            Text(
+              text,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color:
+                    isOutlined
+                        ? const Color(0xFF306AE0)
+                        : (isGoogle ? const Color(0xFF252525) : textColor),
+                fontSize: isGoogle ? 14 : fontSize,
+                fontFamily: 'Helvetica',
+                fontWeight: fontWeight,
+                height: isGoogle ? 1.40 : 1.50,
+                letterSpacing: isGoogle ? -0.14 : 0,
               ),
             ),
 
-            SizedBox(width: isGoogle ? 0 : spacing / 2),
+            if (isGoogle)
+              // Add equal spacing at the end to balance the layout
+              const SizedBox(width: 8),
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-// lib/widgets/user_list_item.dart
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../theme/theme.dart';
@@ -38,11 +36,19 @@ class UserListItem extends StatelessWidget {
         children: [
           // SVG icon from assets
           SvgPicture.asset(
-            'lib/assets/icons/UserCircle.svg',
+            'lib/assets/icons/UserCircle.svg', // Verify path is correct
             width: 31,
             height: 31,
-            color: AppColors.mailGray[900], // dark icon tint
+            color: AppColors.mailGray[900],
             colorBlendMode: BlendMode.srcIn,
+            // Add error handling
+            errorBuilder: (context, error, stackTrace) {
+              return Icon(
+                Icons.account_circle,
+                size: 31,
+                color: AppColors.mailGray[900],
+              );
+            },
           ),
           const SizedBox(width: 12),
           // Name & email

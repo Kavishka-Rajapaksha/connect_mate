@@ -1,3 +1,4 @@
+import 'package:connect_mate/screens/signin_page.dart';
 import 'package:flutter/material.dart';
 import 'package:connect_mate/widgets/primary_button_wdget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -30,205 +31,247 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 32),
-
-                      // Header section
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Sign Up to your Account',
-                            style: TextStyle(
-                              color: AppColors.mailGray[950],
-                              fontSize: 32,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.w700,
-                              height: 1.30,
-                              letterSpacing: -0.64,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(
+                255,
+                140,
+                195,
+                250,
+              ), // Light blue gradient color like in image
+              Colors.white,
+            ],
+            stops: [0.0, 0.3], // Gradient fades to white at 30% of the screen
+          ),
+        ),
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Add logo at the top center
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 16, bottom: 24),
+                            child: SvgPicture.asset(
+                              'lib/assets/icons/logo_last.svg',
+                              height: 36,
+                              width: 46.53,
                             ),
                           ),
-                          const SizedBox(height: 12),
-                          Text(
-                            'Enter your email and password to log in',
-                            style: TextStyle(
-                              color: AppColors.mailGray[400],
-                              fontSize: 12,
-                              fontFamily: 'Helvetica',
-                              fontWeight: FontWeight.w400,
-                              height: 1.40,
-                              letterSpacing: -0.12,
+                        ),
+
+                        const SizedBox(height: 32),
+
+                        // Header section
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Sign Up to you\nAccount',
+                              style: TextStyle(
+                                color: AppColors.mailGray[950],
+                                fontSize: 32,
+                                fontFamily: 'Helvetica',
+                                fontWeight: FontWeight.w700,
+                                height: 1.30,
+                                letterSpacing: -0.64,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 32),
-
-                      // Form fields
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          PrimaryTextField(
-                            placeholder: 'Name',
-                            controller: _nameController,
-                            onChanged: (value) {},
-                          ),
-
-                          const SizedBox(height: 8),
-                          PrimaryTextField(
-                            placeholder: 'Email',
-                            controller: _emailController,
-                            onChanged: (value) {},
-                          ),
-
-                          const SizedBox(height: 8),
-
-                          // Password field
-                          PrimaryTextField(
-                            placeholder: 'Password',
-                            isPassword: true,
-                            controller: _passwordController,
-                            onChanged: (value) {
-                              // Handle password changes if needed
-                            },
-                          ),
-
-                          const SizedBox(height: 8),
-
-                          // Phone number field (optional)
-                          PrimaryTextField(
-                            placeholder: 'Phone Number (Optional)',
-                            controller: _phoneController,
-                            onChanged: (value) {
-                              // Handle phone changes if needed
-                            },
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      // Sign Up Button
-                      PrimaryButton(
-                        text: 'Sign Up',
-                        onPressed: () {
-                          // Handle sign up logic
-                        },
-                        backgroundColor:
-                            AppColors.azureRadiance[600] ??
-                            const Color(0xFF306AE0),
-                        borderRadius: 4,
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Divider with "Or" text
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Divider(color: AppColors.mailGray[100]),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            child: Text(
-                              'Or',
+                            const SizedBox(height: 12),
+                            Text(
+                              'Enter your email and password to log in',
                               style: TextStyle(
                                 color: AppColors.mailGray[400],
                                 fontSize: 12,
-                                fontFamily: 'Inter',
+                                fontFamily: 'Helvetica',
                                 fontWeight: FontWeight.w400,
-                                height: 1.50,
+                                height: 1.40,
                                 letterSpacing: -0.12,
                               ),
                             ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 32),
+
+                        // Form fields
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            PrimaryTextField(
+                              placeholder: 'Name',
+                              controller: _nameController,
+                              onChanged: (value) {},
+                            ),
+
+                            const SizedBox(height: 8),
+                            PrimaryTextField(
+                              placeholder: 'Email',
+                              controller: _emailController,
+                              onChanged: (value) {},
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // Password field
+                            PrimaryTextField(
+                              placeholder: 'Password',
+                              isPassword: true,
+                              controller: _passwordController,
+                              onChanged: (value) {
+                                // Handle password changes if needed
+                              },
+                            ),
+
+                            const SizedBox(height: 8),
+
+                            // Phone number field (optional)
+                            PrimaryTextField(
+                              placeholder: 'Phone Number (Optional)',
+                              controller: _phoneController,
+                              onChanged: (value) {
+                                // Handle phone changes if needed
+                              },
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 24),
+
+                        // Sign Up Button
+                        PrimaryButton(
+                          text: 'Sign Up',
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignInPage(),
+                              ),
+                            );
+                          },
+                          backgroundColor:
+                              AppColors.azureRadiance[600] ??
+                              const Color(0xFF306AE0),
+                          borderRadius: 4,
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // Divider with "Or" text
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(color: AppColors.mailGray[100]),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                              ),
+                              child: Text(
+                                'Or',
+                                style: TextStyle(
+                                  color: AppColors.mailGray[400],
+                                  fontSize: 12,
+                                  fontFamily: 'Inter',
+                                  fontWeight: FontWeight.w400,
+                                  height: 1.50,
+                                  letterSpacing: -0.12,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Divider(color: AppColors.mailGray[100]),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 16),
+
+                        // Google Sign Up button
+                        PrimaryButton(
+                          text: 'Continue with Google',
+                          onPressed: () {
+                            // Handle Google sign up
+                          },
+                          isGoogle: true,
+                          borderRadius: 4,
+                          googleIcon: SvgPicture.asset(
+                            'lib/assets/icons/google.svg',
+                            height: 18,
+                            width: 18,
                           ),
-                          Expanded(
-                            child: Divider(color: AppColors.mailGray[100]),
-                          ),
-                        ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+
+                // Bottom login option
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Have an account?',
+                        style: TextStyle(
+                          color: AppColors.mailGray[400],
+                          fontSize: 12,
+                          fontFamily: 'Helvetica',
+                          fontWeight: FontWeight.w400,
+                          height: 1.40,
+                          letterSpacing: -0.12,
+                        ),
                       ),
-
-                      const SizedBox(height: 16),
-
-                      // Google Sign Up button
-                      PrimaryButton(
-                        text: 'Continue with Google',
-                        onPressed: () {
-                          // Handle Google sign up
+                      const SizedBox(width: 6),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SignInPage(),
+                            ),
+                          );
                         },
-                        isGoogle: true,
-                        borderRadius: 4,
-                        googleIcon: SvgPicture.asset(
-                          'lib/assets/icons/google.svg',
-                          height: 18,
-                          width: 18,
+                        child: Text(
+                          'Log In',
+                          style: TextStyle(
+                            color: AppColors.azureRadiance[600],
+                            fontSize: 12,
+                            fontFamily: 'Helvetica',
+                            fontWeight: FontWeight.w700,
+                            height: 1.40,
+                            letterSpacing: -0.12,
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              ),
-
-              // Bottom login option
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Have an account?',
-                      style: TextStyle(
-                        color: AppColors.mailGray[400],
-                        fontSize: 12,
-                        fontFamily: 'Helvetica',
-                        fontWeight: FontWeight.w400,
-                        height: 1.40,
-                        letterSpacing: -0.12,
-                      ),
-                    ),
-                    const SizedBox(width: 6),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        'Log In',
-                        style: TextStyle(
-                          color: AppColors.azureRadiance[600],
-                          fontSize: 12,
-                          fontFamily: 'Helvetica',
-                          fontWeight: FontWeight.w700,
-                          height: 1.40,
-                          letterSpacing: -0.12,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

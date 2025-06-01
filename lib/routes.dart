@@ -1,11 +1,15 @@
+import 'package:connect_mate/screens/history_screen.dart';
+import 'package:connect_mate/screens/show_qr_screen.dart';
 import 'package:connect_mate/screens/sign_up_page.dart';
 import 'package:connect_mate/screens/signin_page.dart';
 import 'package:flutter/material.dart';
-import 'package:connect_mate/screens/testscreen.dart';
 
 abstract class Routes {
-  static const String home = '/';
-  static const String testScreen = '/testScreen';
+  static const String home = '/signIn';
+  static const String signUp = '/signUp';
+  static const String history = '/history';
+  static const String showQR = '/showQR';
+  static const String scanQR = '/scanQR';
 }
 
 class AppRouter {
@@ -13,14 +17,22 @@ class AppRouter {
     switch (routeSettings.name) {
       case Routes.home:
         return _createRoute(const SignInPage());
+      case Routes.signUp:
+        return _createRoute(const SignUpPage());
+      case Routes.showQR:
+        return _createRoute(const ShowQRScreen());
+      case Routes.history:
+        return _createRoute(const HistoryScreen());
+      case Routes.scanQR:
+        return _createRoute(
+          const Scaffold(body: Center(child: Text('Scan QR Screen'))),
+        );
 
       default:
-        // If no matching route is found, go to SplashScreen
-        return _createRoute(const SignInPage());
+        return _createRoute(const ShowQRScreen());
     }
   }
 
-  /// Simple helper to wrap any widget in a MaterialPageRoute.
   static Route<dynamic> _createRoute(Widget page) {
     return MaterialPageRoute(builder: (_) => page);
   }

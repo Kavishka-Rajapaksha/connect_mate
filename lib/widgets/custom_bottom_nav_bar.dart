@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../theme/theme.dart';
+import '../widgets/qr_genarated_bottomsheet.dart'; // Add this import
 
 class BottomNavItem {
   final String title;
@@ -34,7 +35,7 @@ class CustomBottomNavBar extends StatelessWidget {
       height: _barHeight,
       padding: const EdgeInsets.all(8.0),
       decoration: BoxDecoration(
-        color: Colors.white, // ← bar is white now
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
@@ -54,7 +55,15 @@ class CustomBottomNavBar extends StatelessWidget {
 
           return Expanded(
             child: GestureDetector(
-              onTap: () => onTap(i),
+              onTap: () {
+                onTap(i);
+                // If the "Show QR" tab is tapped, show the QR bottom sheet
+                if (i == 0) {
+                  QRGeneratedBottomSheet.show(
+                    context,
+                  ); // Updated to call from new class
+                }
+              },
               behavior: HitTestBehavior.translucent,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
